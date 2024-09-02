@@ -51,4 +51,60 @@ public:
     }
 };
 
+// create some type aliases for vector
+using point3 = vector; // 3D point
+using color = vector;  // RGB color
+
+// utilities
+inline std::ostream &operator<<(std::ostream &out, const vector &v)
+{
+    return out << v.e[0] + " " + v.e[1] + " " + v.e[2];
+}
+
+inline vector operator+(const vector &u, const vector &v)
+{
+    return vector(u.e[0] + v.e[0], u.e[1] + v.e[1], u.e[2] + v.e[2]);
+}
+inline vector operator-(const vector &u, const vector &v)
+{
+    return vector(u.e[0] - v.e[0], u.e[1] - v.e[1], u.e[2] - v.e[2]);
+}
+
+inline vector operator*(const vector &u, const vector &v)
+{
+    return vector(u.e[0] * v.e[0], u.e[1] * v.e[1], u.e[2] * v.e[2]);
+}
+
+inline vector operator*(double t, const vector &v)
+{
+    return vector(t * v.e[0], t * v.e[1], t * v.e[2]);
+}
+
+inline vector operator*(const vector &v, double t)
+{
+    return t * v;
+}
+
+inline vector operator/(const vector &v, double t)
+{
+    return (1 / t) * v;
+}
+
+inline double dot(const vector &u, const vector &v)
+{
+    return u.e[0] * v.e[0] + u.e[1] * v.e[1] + u.e[2] * v.e[2];
+}
+
+inline vector cross(const vector &u, const vector &v)
+{
+    return vector(u.e[1] * v.e[2] - u.e[2] * v.e[1],
+                  u.e[2] * v.e[0] - u.e[0] * v.e[2],
+                  u.e[0] * v.e[1] - u.e[1] * v.e[0]);
+}
+
+inline vector unit_vector(const vector &v)
+{
+    return v / v.length();
+}
+
 #endif
