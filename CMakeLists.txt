@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 17)
 project(HeliosRT)
 
 # Add the executable
-add_executable(helios main.cpp)
+add_executable(helios main.cpp vector.hpp color.hpp)
