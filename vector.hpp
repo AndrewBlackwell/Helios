@@ -52,8 +52,7 @@ public:
 };
 
 // create some type aliases for vector
-using point3 = vector; // 3D point
-using color = vector;  // RGB color
+using point3D = vector; // 3D point
 
 // utilities
 inline std::ostream &operator<<(std::ostream &out, const vector &v)
