@@ -58,7 +58,7 @@ using color = vector;  // RGB color
 // utilities
 inline std::ostream &operator<<(std::ostream &out, const vector &v)
 {
-    return out << v.e[0] + " " + v.e[1] + " " + v.e[2];
+    return out << v.e[0] << " " << v.e[1] << " " << v.e[2];
 }
 
 inline vector operator+(const vector &u, const vector &v)
