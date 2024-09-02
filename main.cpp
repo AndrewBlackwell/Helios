@@ -10,11 +10,12 @@ int main()
 
     for (int i = 0; i < height; i++)
     {
+        std::clog << "\rLines remaining: " << (height - i) << ' ' << std::flush;
         for (int j = 0; j < width; j++)
         {
-            auto red = double(j) / (height - 1);
-            auto green = double(i) / (width - 1);
-            auto blue = 0.0;
+            auto green = double(j) / (height - 1);
+            auto blue = double(i) / (width - 1);
+            auto red = 0.5 * (green + blue);
 
             int ired = int(255.999 * red);
             int igreen = int(255.999 * green);
@@ -23,5 +24,6 @@ int main()
             std::cout << ired << " " << igreen << " " << iblue << "\n";
         }
     }
+    std::clog << "\rDone!                 \n";
     return 0;
 }
