@@ -13,9 +13,9 @@ int main()
         std::clog << "\rLines remaining: " << (height - i) << ' ' << std::flush;
         for (int j = 0; j < width; j++)
         {
-            auto green = double(j) / (height - 1);
-            auto blue = double(i) / (width - 1);
-            auto red = 0.5 * (green + blue);
+            auto red = double(j) / (height - 1);
+            auto green = double(i) / (width - 1);
+            auto blue = 0.5 * (red + green);
 
             int ired = int(255.999 * red);
             int igreen = int(255.999 * green);
