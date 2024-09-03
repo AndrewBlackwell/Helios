@@ -1,12 +1,47 @@
 #include "color.hpp"
 #include "vector.hpp"
+#include "ray.hpp"
 
 #include <iostream>
 
+color ray_color(const ray &r)
+{
+    vector unit_direction = unit_vector(r.direction());
+    auto a = 0.5 * (unit_direction.y() + 1.0);
+    return (1.0 - a) * color(1.0, 1.0, 1.0) + a * color(0.5, 0.7, 1.0);
+}
+
 int main()
 {
-    int width = 256;
-    int height = 256;
+    // Image
+
+    auto aspect_ratio = 16.0 / 9.0;
+    int width = 400;
+
+    // Calculate the image height, and ensure that it's at least 1.
+    int height = int(width / aspect_ratio);
+    height = (height < 1) ? 1 : height;
+
+    // Camera
+
+    auto focal_length = 1.0;
+    auto viewport_height = 2.0;
+    auto viewport_width = viewport_height * (double(width) / height);
+    auto camera_center = point3D(0, 0, 0);
+
+    // Calculate the vectors across the horizontal and down the vertical viewport edges.
+    auto viewport_u = vector(viewport_width, 0, 0);
+    auto viewport_v = vector(0, -viewport_height, 0);
+
+    // Calculate the horizontal and vertical delta vectors from pixel to pixel.
+    auto pixel_delta_u = viewport_u / width;
+    auto pixel_delta_v = viewport_v / height;
+
+    // Calculate the location of the upper left pixel.
+    auto viewport_upper_left = camera_center - vector(0, 0, focal_length) - viewport_u / 2 - viewport_v / 2;
+    auto pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
+
+    // Render
 
     std::cout << "P3\n"
               << width << " " << height << "\ns255\n";
@@ -16,20 +51,11 @@ int main()
         std::clog << "\rLines remaining: " << (height - i) << ' ' << std::flush;
         for (int j = 0; j < width; j++)
         {
-            // Normalize coordinates to range [0, 1]
-            double x = double(i) / (width - 1);
-            double y = double(j) / (height - 1);
+            auto pixel_center = pixel00_loc + (j * pixel_delta_u) + (i * pixel_delta_v);
+            auto ray_direction = pixel_center - camera_center;
+            ray r(camera_center, ray_direction);
 
-            // Calculate the angle of the point in polar coordinates
-            double angle = std::atan2(y - 0.5, x - 0.5) + M_PI;
-
-            // Map angle to a color: 0 to 2π maps to 0 to 1 (normalized)
-            double r = 0.5 + 0.5 * std::cos(angle);
-            double g = 0.5 + 0.5 * std::cos(angle - 2.0 * M_PI / 3.0);
-            double b = 0.5 + 0.5 * std::cos(angle - 4.0 * M_PI / 3.0);
-
-            // Create a color object from these values
-            auto pixel_color = color(r, g, b);
+            color pixel_color = ray_color(r);
             write_color(std::cout, pixel_color);
         }
     }
