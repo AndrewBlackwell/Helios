@@ -1,9 +1,6 @@
 #ifndef VEC_HPP
 #define VEC_HPP
 
-#include <cmath>
-#include <iostream>
-
 class vector
 {
 public:

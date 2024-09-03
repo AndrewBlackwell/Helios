@@ -1,7 +1,7 @@
 #ifndef IS_HITTABLE_HPP
 #define IS_HITTABLE_HPP
 
-#include "ray.hpp"
+#include "common.hpp"
 
 class hit_record
 {

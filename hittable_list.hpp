@@ -2,12 +2,7 @@
 #define HITTABLE_LIST_H
 
 #include "is_hittable.hpp"
-
-#include <memory>
 #include <vector>
-
-using std::make_shared;
-using std::shared_ptr;
 
 class hittable_list : public is_hittable
 {

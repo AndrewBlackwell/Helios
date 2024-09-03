@@ -2,7 +2,6 @@
 #define COLOR_HPP
 
 #include "vector.hpp"
-#include <iostream>
 
 using color = vector; // RGB color
 

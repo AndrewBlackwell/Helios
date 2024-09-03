@@ -2,7 +2,6 @@
 #define SPHERE_H
 
 #include "is_hittable.hpp"
-#include "vector.hpp"
 
 class sphere : public is_hittable
 {
