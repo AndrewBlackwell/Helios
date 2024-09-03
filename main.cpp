@@ -4,21 +4,31 @@
 
 #include <iostream>
 
-bool hit_sphere(const point3D &center, double radius, const ray &r)
+double hit_sphere(const point3D &center, double radius, const ray &r)
 {
     vector oc = center - r.origin();
     auto a = dot(r.direction(), r.direction());
     auto b = -2.0 * dot(r.direction(), oc);
     auto c = dot(oc, oc) - radius * radius;
     auto discriminant = b * b - 4 * a * c;
-    return (discriminant >= 0);
+
+    if (discriminant < 0)
+    {
+        return -1.0;
+    }
+    else
+    {
+        return (-b - std::sqrt(discriminant)) / (2.0 * a);
+    }
 }
 
 color ray_color(const ray &r)
 {
-    if (hit_sphere(point3D(0, 0, -1), 0.5, r))
+    auto t = hit_sphere(point3D(0, 0, -1), 0.5, r);
+    if (t > 0.0)
     {
-        return color(1, 0, 0);
+        vector N = unit_vector(r.at(t) - vector(0, 0, -1));
+        return 0.5 * color(N.x() + 1, N.y() + 1, N.z() + 1);
     }
 
     vector unit_direction = unit_vector(r.direction());
