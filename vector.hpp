@@ -46,6 +46,16 @@ public:
     {
         return (e[0] * e[0] + e[1] * e[1] + e[2] * e[2]);
     }
+
+    static vector random()
+    {
+        return vector(random_double(), random_double(), random_double());
+    }
+
+    static vector random(double min, double max)
+    {
+        return vector(random_double(min, max), random_double(min, max), random_double(min, max));
+    }
 };
 
 // create some type aliases for vector
@@ -101,6 +111,26 @@ inline vector cross(const vector &u, const vector &v)
 inline vector unit_vector(const vector &v)
 {
     return v / v.length();
+}
+
+inline vector random_unit_vector()
+{
+    while (true)
+    {
+        auto p = vector::random(-1, 1);
+        auto lensq = p.length_squared();
+        if (1e-160 < lensq && lensq <= 1)
+            return p / sqrt(lensq);
+    }
+}
+
+inline vector random_on_hemisphere(const vector &normal)
+{
+    vector on_unit_sphere = random_unit_vector();
+    if (dot(on_unit_sphere, normal) > 0.0) // In the same hemisphere as the normal
+        return on_unit_sphere;
+    else
+        return -on_unit_sphere;
 }
 
 #endif
