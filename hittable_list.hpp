@@ -1,5 +1,5 @@
-#ifndef HITTABLE_LIST_H
-#define HITTABLE_LIST_H
+#ifndef HITTABLE_LIST_HPP
+#define HITTABLE_LIST_HPP
 
 #include "is_hittable.hpp"
 #include <vector>

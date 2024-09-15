@@ -3,13 +3,14 @@
 
 #include "common.hpp"
 
+class material;
 class hit_record
 {
 public:
     point3D p;
     vector normal;
     double t;
-
+    shared_ptr<material> mat;
     bool front_face;
 
     void set_face_normal(const ray &r, const vector &outward_normal)
