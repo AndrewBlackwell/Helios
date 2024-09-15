@@ -2,7 +2,7 @@
 
 **Helios** is a C++ pathtracing and raytracing project that aims to simulate realistic light interactions within a 3D scene. It follows the core concepts of ray tracing, allowing for accurate reflections, refractions, shadows, and other lighting phenomena to create photorealistic images.
 
-Loosely inspired by Peter Shirley's _Ray Tracing in One Weekend_, **Helios** implements key raytracing features, including:
+Loosely adapted from Peter Shirley's _Ray Tracing in One Weekend_, **Helios** implements key raytracing features, including:
 
 - **Ray-Sphere Intersections**: Efficient detection of intersections between rays and spherical objects.
 - **Surface Normals**: Accurate calculation of normals for shading and light reflection.
