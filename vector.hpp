@@ -145,4 +145,12 @@ inline vector reflect(const vector &v, const vector &n)
     return v - 2 * dot(v, n) * n;
 }
 
+inline vector refract(const vector &uv, const vector &n, double etai_over_etat)
+{
+    auto cos_theta = std::fmin(dot(-uv, n), 1.0);
+    vector r_out_perp = etai_over_etat * (uv + cos_theta * n);
+    vector r_out_parallel = -std::sqrt(std::fabs(1.0 - r_out_perp.length_squared())) * n;
+    return r_out_perp + r_out_parallel;
+}
+
 #endif
