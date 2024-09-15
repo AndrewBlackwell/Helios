@@ -3,6 +3,7 @@
 
 #include "common.hpp"
 
+// forward declare the material class
 class material;
 class hit_record
 {
